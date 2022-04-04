@@ -1,0 +1,51 @@
+from tkinter import *
+from tkinter import ttk
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+import time
+
+Path  = "C:\Chrome Driver\chromedriver.exe"
+driver = webdriver.Chrome(Path)
+driver.get("https://www.Google.com")
+
+root = Tk()
+root.title("Weather Report")
+l = Label(root, text="WEATHER REPORT", bg="blue", font = 81, width = 40)
+l.grid(row=0,columnspan=2)
+
+driver.find_element_by_xpath("""//*[@id="L2AGLb"]/div""").click()
+s = driver.find_element_by_name("q")
+
+s.send_keys("Weather")
+s.send_keys(Keys.RETURN)
+
+location = driver.find_element_by_id("wob_loc")
+dateandtime = driver.find_element_by_class_name("wob_dts")
+temperature = driver.find_element_by_id("wob_tm")
+infomation = driver.find_element_by_class_name("wtsRwe")
+
+loc = Label(root, text="Location: ", bg="orange",font=60, width =20)
+DandT = Label(root, text="Date and Time: ", bg="orange",font = 60, width =20)
+Temp = Label(root, text="Temperature: ", bg = "yellow", font = 60, width =20) 
+info = Label(root, text="Info: ", bg = "grey", font = 60, width = 20)
+
+loc2 = Label(root, text=location.text, font= 60, width = 20)
+dateandtime2 = Label(root, text=dateandtime.text, font = 60, width = 20)
+temperature2 = Label(root, text=(temperature.text,"°C"), font = 60, width = 20)
+info2 = Label(root, text = infomation.text, font = 60, width = 20)
+
+
+loc2.grid(row=1,column=1)
+dateandtime2.grid(row=2,column=1)
+temperature2.grid(row=3, column=1)
+info2.grid(row=4,column=1)
+
+loc.grid(row=1,column=0)
+DandT.grid(row=2,column=0)
+Temp.grid(row=3,column=0)
+info.grid(row=4,column=0)
+
+driver.close()
+
+
+root.mainloop()
