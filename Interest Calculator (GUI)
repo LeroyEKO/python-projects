@@ -1,0 +1,104 @@
+from tkinter import *
+
+root = Tk()
+root.title("COMPOUND INTEREST CALCULATOR")
+
+
+
+def numformant(num):
+    return ("{:,}".format(num))
+
+amount_ = Label(root, text="Enter the amount of money you will invest:                £")
+years_ = Label(root, text="Enter the amount of years you are going to invest for: ")
+interestrate_ = Label(root, text="Enter the interest rate:                                                 (%): ")
+
+amount_.grid(row=0,column=0)
+years_.grid(row=1,column=0)
+interestrate_.grid(row=2,column=0)
+
+amount = Entry(width=25)
+years = Entry(width=25)
+interestrate = Entry(width=25)
+
+amount.grid(row=0,column=1)
+years.grid(row=1,column=1)
+interestrate.grid(row=2,column=1)
+
+
+
+def entered():
+    oa = str(amount.get())
+    a = float(amount.get())
+    y = float(years.get())
+    orignal_years = int(years.get())
+    ir = float(interestrate.get())
+
+    root2 = Tk()
+    root2.title("INTEREST CALCULATED")
+
+    titleyears = Label(root2,text = "YEARS")
+    titleamout = Label(root2,text = "AMOUNT")
+    titleIR = Label(root2,text = "INTEREST RATE")
+    titleinterest = Label(root2,text = "INTEREST")
+    titlefinal = Label(root2,text = "FINAL")
+
+    titleyears.grid(column=0,row=0)
+    titleamout.grid(column=1,row=0)
+    titleIR.grid(column=2,row=0)
+    titleinterest.grid(column=3,row=0)
+    titlefinal.grid(column=4,row=0)
+
+    y_=1
+    r=2
+    interest = a*ir/100
+    final = a + interest
+
+    a1 = Label(root2,text = str(y_))
+    a2 = Label(root2,text = "£"+str(numformant(round(a,2))))
+    a3 = Label(root2,text = str(ir)+"%")
+    a4 = Label(root2,text = "£"+str(numformant(round(interest,2))))
+    a5 = Label(root2,bg = "yellow",text = "£"+str(numformant(round(final,2))))
+
+    a1.grid(column=0,row=1)
+    a2.grid(column=1,row=1)
+    a3.grid(column=2,row=1)
+    a4.grid(column=3,row=1)
+    a5.grid(column=4,row=1)
+
+    if orignal_years > 1:
+
+        for x in range(orignal_years-1):
+            y_ = y_ + 1
+            a = final
+            interest = a * ir / 100
+            final = a + interest
+
+            a1 = Label(root2, text=str(y_))
+            a2 = Label(root2, text="£"+str(numformant(round(a, 2))))
+            a3 = Label(root2, text=str(ir) + "%")
+            a4 = Label(root2, text="£"+str(numformant(round(interest, 2))))
+            a5 = Label(root2, bg = "yellow",text="£"+str(numformant(round(final, 2))))
+
+            a1.grid(column=0, row=r)
+            a2.grid(column=1, row=r)
+            a3.grid(column=2, row=r)
+            a4.grid(column=3, row=r)
+            a5.grid(column=4, row=r)
+
+            r = r+1
+        f = Label(root2,text=(f"Final amount after investing £{oa} for {str(orignal_years)} years at {str(ir)}% = "))
+        ff = Label(root2,text="£"+str(round(final,2)),bg="orange")
+
+        f.grid(columnspan=4,row=r+1)
+        ff.grid(column=4,row=r+1)
+    else:
+        pass
+
+    #data = Label(root, text="amount = £"+a+"\nyears = "+y+"\ninterest rate"+ir)
+    #data.grid(column=0)
+
+enterbutton = Button(root,width=21, text="Enter", command=entered)
+enterbutton.grid(column=1)
+
+
+root.mainloop()
