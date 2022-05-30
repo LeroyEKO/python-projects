@@ -2,6 +2,9 @@ from tkinter import * # importing tkinter python libary
 root = Tk() # the main window of the program
 root.title("CALCULATOR PROGRAM") # title of the window
 
+img = PhotoImage(file ="calcicon.png") # creating photot image for the window
+root.iconphoto(False,img) # appending the photo into the window
+
 etw = Entry(root,width = 60, borderwidth = 5) # creating the entry bar/widget for user input
 etw.grid(row = 0, columnspan = 3) # adding entry widget to the main window with columnspan of 3
 
